@@ -1,27 +1,27 @@
-### AST-оптимизация замены if(false) на его else ветку
+### AST-оптимизация замены if(true) на его true ветку
 
 #### Постановка задачи
-Реализовать оптимизацию по AST дереву вида if(false) st1 else st2 => st2
+Реализовать оптимизацию по AST дереву вида if(true) st1 else st2 => st1
 
 #### Команда
-К. Галицкий, А. Черкашин
+А. Татарова, Т. Шкуро, Д. Володин, Н. Моздоров
 
 #### Зависимые и предшествующие задачи
 Предшествующие задачи:
 * AST дерево
 
 #### Теоретическая часть
-Реализовать оптимизацию по AST дереву вида if(false) st1 else st2 => st2
+Реализовать оптимизацию по AST дереву вида if(true) st1 else st2 => st1
   * До
   ```csharp
-  if(false)
+  if(true)
     st1;
   else
     st2;
   ```
   * После
   ```csharp
-  st2;
+  st1;
   ```
 
 #### Практическая часть
@@ -29,17 +29,13 @@
 
 ```csharp
     if (n is IfElseNode ifNode)  // Если это корень if
-        if (ifNode.Expr is BoolValNode boolNode && boolNode.Val == false) // Если выражение == false
+        if (ifNode.Expr is BoolValNode boolNode && boolNode.Val) // Если выражение == true
         {
-            if (ifNode.FalseStat != null)  // Если ветка fasle не NULL
+            if (ifNode.TrueStat != null)
             {
-                ifNode.FalseStat.Visit(this);
-                ReplaceStat(ifNode, ifNode.FalseStat);  //  Меняем наш корень на ветку else
+                ifNode.TrueStat.Visit(this);
             }
-            else 
-            {
-                ReplaceStat(ifNode, new EmptyNode());
-            }
+            ReplaceStat(ifNode, ifNode.TrueStat);
         }
 ```
 
@@ -48,7 +44,7 @@
 public static List<ChangeVisitor> Optimizations { get; } = new List<ChangeVisitor>
        {
              /* ... */
-           new OptStatIfFalse(),
+           new OptStatIftrue(),
              /* ... */
        };
 
@@ -69,15 +65,15 @@ public static List<ChangeVisitor> Optimizations { get; } = new List<ChangeVisito
 #### Пример работы
 Исходный код программы:
 ```csharp
-var a, b;
-b = 5
-if(false)
-  a = 3;
+var a;
+a = 14;
+if(true)
+  a = a - 4;
 else
-  a = 57;
+  a = a + 10;
 ```
 Результат работы:
 ```csharp
-b = 5;
-a = 57;
+a = 14;
+a = a - 4;
 ```

@@ -1,8 +1,11 @@
 ### AST-оптимизация замены сравнения переменной с собой на булевскую константу false
+
 #### Постановка задачи
 Реализовать оптимизацию по AST дереву вида (a > a, a != a ) = False
+
 #### Команда
 К. Галицкий, А. Черкашин
+
 #### Зависимые и предшествующие задачи
 Предшествующие задачи:
 * AST дерево
@@ -25,12 +28,13 @@
   ```csharp
   #t1 = False;
   ```
+
 #### Практическая часть
 Примеры реализации метода:
 
 ```csharp
         if (
-                // Для цифр и значяений bool :
+                // Для цифр и значений bool :
                 (binop.Left is IntNumNode && binop.Right is IntNumNode && (binop.Left as IntNumNode).Num == (binop.Right as IntNumNode).Num && (binop.Op == OpType.GREATER || binop.Op == OpType.LESS))
                 || ((binop.Left is BoolValNode && binop.Right is BoolValNode && (binop.Left as BoolValNode).Val == (binop.Right as BoolValNode).Val && (binop.Op == OpType.GREATER || binop.Op == OpType.LESS)))
                 || ((binop.Left is IntNumNode && binop.Right is IntNumNode && (binop.Left as IntNumNode).Num == (binop.Right as IntNumNode).Num && binop.Op == OpType.NOTEQUAL))
@@ -41,7 +45,7 @@
                 )
             {
                 binop.Left.Visit(this);
-                binop.Right.Visit(this); // Вначале сделать то же в правом поддереве
+                binop.Right.Visit(this); // сделать то же в правом поддереве
                 ReplaceExpr(binop, new BoolValNode(false)); // Заменить себя на своё правое поддерево
             }
             else
@@ -72,6 +76,7 @@ public static List<ChangeVisitor> Optimizations { get; } = new List<ChangeVisito
            } while (optInd < Optimizations.Count);
        }
 ```
+
 #### Пример работы
 Исходный код программы:
 ```csharp

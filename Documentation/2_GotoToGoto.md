@@ -1,15 +1,18 @@
 ### Устранение переходов к переходам
+
 #### Постановка задачи
-Создать оптимизирующий модуль програмы устраняющий переходы к переходам.
+Создать оптимизирующий модуль программы устраняющий переходы к переходам.
+
 #### Команда
 К. Галицкий, А. Черкашин
+
 #### Зависимые и предшествующие задачи
 Предшествующие задачи:
 * Трехадресный код
 
 #### Теоретическая часть
-В рамках этой задачи необходимо было реализовать оптимизацию устранения переходов к переходам. Если оператор goto ведет на метку, содержащую в goto переход на следующую метку. Необходимо протянуть финальную метку до начального goto.
-Были поставленны следующие задачи:
+В рамках этой задачи необходимо было реализовать оптимизацию устранения переходов к переходам. Если оператор goto ведет на метку, содержащую в goto переход на следующую метку, необходимо протянуть финальную метку до начального goto.
+Были поставлены  следующие задачи:
 * До
   ```csharp
   goto L1;
@@ -93,7 +96,7 @@ public string labelfrom;
             List<Instruction> tmpcommands = new List<Instruction>();  // Трехадресный код
 ```
 
-Зполнение списка переходов:
+Заполнение  списка переходов:
 ```csharp
             for (int i = 0; i < commands.Count; i++)
             {
@@ -123,12 +126,12 @@ public string labelfrom;
                         {
                             if (tmpcommands[i].Argument1.ToString() == list[j].labelfrom.ToString())  // Если правая метка совпадает
                             {
-                                changed |= false;  //  Изменений проведенно не было
+                                changed |= false;  //  Изменений проведено не было
                             }
                             else
                             {
                                 changed |= true; //  Изменения были проведены
-                                tmpcommands[i] = new Instruction(tmpcommands[i].Label, "goto", list[j].labelfrom.ToString(), "", "");  // Меняем инструкцию меняя в ней правую часть на необхзодимю нам метку
+                                tmpcommands[i] = new Instruction(tmpcommands[i].Label, "goto", list[j].labelfrom.ToString(), "", "");  // Меняем инструкцию, изменяя в ней правую часть на необходимую нам метку
                             }
 
                         }
@@ -144,11 +147,11 @@ public string labelfrom;
 
                             if (tmpcommands[i].Argument2.ToString() == list[j].labelfrom.ToString()) // Если правая метка совпадает
                             {
-                                changed |= false; //  Изменений проведенно не было
+                                changed |= false; //  Изменений проведено не было
                             }
                             else
                             {
-                                tmpcommands[i] = new Instruction(tmpcommands[i].Label, "ifgoto", tmpcommands[i].Argument1, list[j].labelfrom.ToString(), ""); // Меняем инструкцию меняя в ней правую часть на необхзодимю нам метку
+                                tmpcommands[i] = new Instruction(tmpcommands[i].Label, "ifgoto", tmpcommands[i].Argument1, list[j].labelfrom.ToString(), ""); // Меняем инструкцию, изменяя в ней правую часть на необходимую нам метку
                                 changed |= true; //  Изменения были проведены
                             }
 
@@ -185,6 +188,7 @@ parser.root.Visit(threeAddrCodeVisitor);
 var threeAddressCode = threeAddrCodeVisitor.Instructions;
 var optResult = ThreeAddressCodeOptimizer.OptimizeAll(threeAddressCode);
 ```
+
 #### Тесты
 В тестах проверяется, что применение оптимизации устранения переходов к переходам к заданному трехадресному коду, возвращает ожидаемый результат:
 ```csharp
