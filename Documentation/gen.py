@@ -20,7 +20,7 @@ def main():
             order.append(line.strip())
     toc = gen_toc(order)
 
-    res = codecs.open("Documentation.md", "a", "utf_8_sig")
+    res = codecs.open("Documentation.md", "w", "utf_8_sig")
     res.write(toc)
     res.write("\n")
     for name in order:
