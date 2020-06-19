@@ -161,7 +161,8 @@ public class UnOpNode : ExprNode{
 ```charp
 a = 5;
 ```
-![Присваивание](0_Parser%26AST/pic1.png)
+![Присваивание](https://github.com/Taally/FIIT_6_compiler/blob/master/Documentation/0_Parser%26AST/pic1.png)
+
 2.
 ```charp
 if a > 10
@@ -171,4 +172,4 @@ else {
     a = b;
 }
 ```
-![Условный оператор](0_Parser%26AST/pic2.png)
+![Условный оператор](https://github.com/Taally/FIIT_6_compiler/blob/master/Documentation/0_Parser%26AST/pic2.png)
