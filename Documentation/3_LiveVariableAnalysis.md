@@ -20,15 +20,15 @@ __useB__ -  множество переменных, значения котор
 Отсюда любая переменная из useB рассматривается как активная на входе в блок B, а переменная из defB рассматривается как мертвая на входе в блок B. 
 И тогда множества IN и OUT определяются следующими уравнениями
 
-1. ![Уравнение 1](https://github.com/Taally/FIIT_6_compiler/blob/feature/try-doc-gen/Documentation/3_LiveVariableAnalysis/pic1.jpg)
+1. ![Уравнение 1](https://github.com/Taally/FIIT_6_compiler/blob/master/Documentation/3_LiveVariableAnalysis/pic1.jpg)
 
 Это уравнение определяет граничное условие, что активных переменных при выходе из программы нет.
 
-1. ![Уравнение 2](https://github.com/Taally/FIIT_6_compiler/blob/feature/try-doc-gen/Documentation/3_LiveVariableAnalysis/pic2.jpg)
+1. ![Уравнение 2](https://github.com/Taally/FIIT_6_compiler/blob/master/Documentation/3_LiveVariableAnalysis/pic2.jpg)
 
 Второе уравнение говорит о том, что переменная активна при выходе из блока тогда и только тогда, когда она активна при входе по крайней мере в один из дочерних блоков. Здесь оператор сбора является объединением.
 
-1. ![Уравнение 3](https://github.com/Taally/FIIT_6_compiler/blob/feature/try-doc-gen/Documentation/3_LiveVariableAnalysis/pic3.jpg)
+1. ![Уравнение 3](https://github.com/Taally/FIIT_6_compiler/blob/master/Documentation/3_LiveVariableAnalysis/pic3.jpg)
 
 Здесь уравнение гласит, что переменная активна при входе в блок, если она используется в блоке до переопределения или если она активна на выходе из блока и не переопределена в нем.
 

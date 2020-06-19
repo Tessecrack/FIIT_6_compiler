@@ -29,7 +29,7 @@
 
 Пример разбиение трехадресного кода на базовые блоки:
 
-![Разбиение на базовые блоки](https://github.com/Taally/FIIT_6_compiler/blob/feature/try-doc-gen/Documentation/2_BasicBlockLeader/pic1.jpg)
+![Разбиение на базовые блоки](https://github.com/Taally/FIIT_6_compiler/blob/master/Documentation/2_BasicBlockLeader/pic1.jpg)
 
 #### Практическая часть
 Реализовали создание списка операций лидеров:
