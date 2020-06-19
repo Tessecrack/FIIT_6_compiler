@@ -32,12 +32,17 @@
 
 
 Алгоритм для решения прямой задачи потока данных:
-![картинка](3_GenericIterativeAlgorithm/pic2.JPG)
+
+![Прямая задача потока данных](https://github.com/Taally/FIIT_6_compiler/blob/feature/try-doc-gen/Documentation/3_GenericIterativeAlgorithm/pic2.JPG)
+
 Алгоритм для решения обратной задачи потока данных:
-![картинка](3_GenericIterativeAlgorithm/pic1.JPG)
+
+![Обратная задача потока данных](https://github.com/Taally/FIIT_6_compiler/blob/feature/try-doc-gen/Documentation/3_GenericIterativeAlgorithm/pic1.JPG)
+
 Служит для избежания базового итеративного алгоритма для каждой структуры потока данных используемой на стадии оптимизации.
 Его задача вычисление in и out для каждого блока как ряд последовательных приближений. А так же его использование предоставляет ряд полезных свойств приведенных ниже:
-![картинка](3_GenericIterativeAlgorithm/pic3.JPG)
+
+![Свойства алгоритма](https://github.com/Taally/FIIT_6_compiler/blob/feature/try-doc-gen/Documentation/3_GenericIterativeAlgorithm/pic3.JPG)
 
 #### Практическая часть
 Реализовали класс выходных данных:

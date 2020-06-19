@@ -25,11 +25,11 @@
 
 1. 
 
-![Оптимизация свертки унарных операций](1_OptExprFoldUnary&TransformUnaryToValue/pic1.png)
+![Оптимизация свертки унарных операций](https://github.com/Taally/FIIT_6_compiler/blob/feature/try-doc-gen/Documentation/1_OptExprFoldUnary%26TransformUnaryToValue/pic1.png)
 
-2. 
+1. 
 
-![Оптимизация устранения унарных операций](1_OptExprFoldUnary&TransformUnaryToValue/pic2.png)
+![Оптимизация устранения унарных операций](https://github.com/Taally/FIIT_6_compiler/blob/feature/try-doc-gen/Documentation/1_OptExprFoldUnary%26TransformUnaryToValue/pic2.png)
 
 
 #### Практическая часть
