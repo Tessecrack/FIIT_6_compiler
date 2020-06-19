@@ -30,7 +30,7 @@ namespace SimpleLang.Visitors
             // перевод в трёхадресный код условия
             var exprTmpName = Gen(i.Expr);
 
-            var trueLabel = ThreeAddressCodeTmp.GenTmpLabel();
+            var trueLabel = string.Empty;
             if (i.TrueStat is LabelStatementNode label)
             {
                 trueLabel = label.Label.Num.ToString();
@@ -43,18 +43,25 @@ namespace SimpleLang.Visitors
             }
 
             var falseLabel = ThreeAddressCodeTmp.GenTmpLabel();
-            GenCommand("", "ifgoto", exprTmpName, trueLabel, "");
-
-            // перевод в трёхадресный код false ветки
-            i.FalseStat?.Visit(this);
-            GenCommand("", "goto", falseLabel, "", "");
+            var endLabel = ThreeAddressCodeTmp.GenTmpLabel();
+            var tmpVar = ThreeAddressCodeTmp.GenTmpName();
+            GenCommand("", "assign", $"!{exprTmpName}", "", tmpVar);
+            GenCommand("", "ifgoto", tmpVar, falseLabel, "");
 
             // перевод в трёхадресный код true ветки
-            var instructionIndex = Instructions.Count;
             i.TrueStat.Visit(this);
-            Instructions[instructionIndex].Label = trueLabel;
 
-            GenCommand(falseLabel, "noop", "", "", "");
+            // перевод в трёхадресный код false ветки
+            if (i.FalseStat != null)
+            {
+                GenCommand("", "goto", endLabel, "", "");
+
+                var instructionIndex = Instructions.Count;
+                i.FalseStat.Visit(this);
+                Instructions[instructionIndex].Label = falseLabel;
+            }
+
+            GenCommand(endLabel, "noop", "", "", "");
         }
 
         public override void VisitEmptyNode(EmptyNode w) => GenCommand("", "noop", "", "", "");
