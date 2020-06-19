@@ -355,11 +355,11 @@ d = (d or (a < 10));
 
 1. 
 
-![Оптимизация свертки унарных операций](https://github.com/Taally/FIIT_6_compiler/blob/feature/try-doc-gen/Documentation/1_OptExprFoldUnary%26TransformUnaryToValue/pic1.png)
+![Оптимизация свертки унарных операций](https://github.com/Taally/FIIT_6_compiler/blob/master/Documentation/1_OptExprFoldUnary%26TransformUnaryToValue/pic1.png)
 
 1. 
 
-![Оптимизация устранения унарных операций](https://github.com/Taally/FIIT_6_compiler/blob/feature/try-doc-gen/Documentation/1_OptExprFoldUnary%26TransformUnaryToValue/pic2.png)
+![Оптимизация устранения унарных операций](https://github.com/Taally/FIIT_6_compiler/blob/master/Documentation/1_OptExprFoldUnary%26TransformUnaryToValue/pic2.png)
 
 
 #### Практическая часть
@@ -655,13 +655,13 @@ a = false;
 Эта оптимизация представляет собой визитор, унаследованный от ChangeVisitor и меняющий ссылки между узлами ACT.
 Рассмотрим некие узлы АСТ:
 
-![Узлы AСT до оптимизации](https://github.com/Taally/FIIT_6_compiler/blob/feature/try-doc-gen/Documentation/1_OptExprMultDivByOne/pic1.png)
+![Узлы AСT до оптимизации](https://github.com/Taally/FIIT_6_compiler/blob/master/Documentation/1_OptExprMultDivByOne/pic1.png)
 
 Эта блок-схема соответствует строчке  ```b = a * 1```.
 Данная оптимизация должна отработать так: ``` b = a ```.
 Блок-схема ниже показывает, что происходит с деревом после применения этой оптимизации:
 
-![Узлы AСT после оптимизации](https://github.com/Taally/FIIT_6_compiler/blob/feature/try-doc-gen/Documentation/1_OptExprMultDivByOne/pic1.png)
+![Узлы AСT после оптимизации](https://github.com/Taally/FIIT_6_compiler/blob/master/Documentation/1_OptExprMultDivByOne/pic1.png)
 
 #### Практическая часть
 Алгоритм заходит только в узлы бинарных операций. Прежде всего проверяются необходимые условия: тип операции либо умножение, либо деление и что один из операндов это единица. Если условия выполняются, в родительском узле происходит замена бинарной операции на переменную. В противном случае узел обрабатывается по умолчанию.
@@ -939,12 +939,12 @@ t2 = x + t1
 
 На примере ниже можно увидеть разбор АСТ узлов, соответствующих выражению ```a = a + b * c```
 
-![Пример трехадресного кода](https://github.com/Taally/FIIT_6_compiler/blob/feature/try-doc-gen/Documentation/2_GenerationTAC/pic1.jpg)
+![Пример трехадресного кода](https://github.com/Taally/FIIT_6_compiler/blob/master/Documentation/2_GenerationTAC/pic1.jpg)
 
 Представление треахдресного кода является четверкой полей 
 (op, arg1, arg2, res). На рисунке ниже показано, как разбирается выражение ```a = b * (-c) + b * (-c)``` в виде треахдресного кода и представляется в таблице четверками:
 
-![Пример четверок трехадресного кода](https://github.com/Taally/FIIT_6_compiler/blob/feature/try-doc-gen/Documentation/2_GenerationTAC/pic2.jpg)
+![Пример четверок трехадресного кода](https://github.com/Taally/FIIT_6_compiler/blob/master/Documentation/2_GenerationTAC/pic2.jpg)
 
 Для хранения меток перехода добавляется еще одно поле Label, и тогда транслируемые инструкции становятся пятерками полей. 
 
@@ -1827,7 +1827,7 @@ goto 1;
 
 Пример разбиение трехадресного кода на базовые блоки:
 
-![Разбиение на базовые блоки](https://github.com/Taally/FIIT_6_compiler/blob/feature/try-doc-gen/Documentation/2_BasicBlockLeader/pic1.jpg)
+![Разбиение на базовые блоки](https://github.com/Taally/FIIT_6_compiler/blob/master/Documentation/2_BasicBlockLeader/pic1.jpg)
 
 #### Практическая часть
 Реализовали создание списка операций лидеров:
@@ -2064,15 +2064,15 @@ __useB__ -  множество переменных, значения котор
 Отсюда любая переменная из useB рассматривается как активная на входе в блок B, а переменная из defB рассматривается как мертвая на входе в блок B. 
 И тогда множества IN и OUT определяются следующими уравнениями
 
-1. ![Уравнение 1](https://github.com/Taally/FIIT_6_compiler/blob/feature/try-doc-gen/Documentation/3_LiveVariableAnalysis/pic1.jpg)
+1. ![Уравнение 1](https://github.com/Taally/FIIT_6_compiler/blob/master/Documentation/3_LiveVariableAnalysis/pic1.jpg)
 
 Это уравнение определяет граничное условие, что активных переменных при выходе из программы нет.
 
-1. ![Уравнение 2](https://github.com/Taally/FIIT_6_compiler/blob/feature/try-doc-gen/Documentation/3_LiveVariableAnalysis/pic2.jpg)
+1. ![Уравнение 2](https://github.com/Taally/FIIT_6_compiler/blob/master/Documentation/3_LiveVariableAnalysis/pic2.jpg)
 
 Второе уравнение говорит о том, что переменная активна при выходе из блока тогда и только тогда, когда она активна при входе по крайней мере в один из дочерних блоков. Здесь оператор сбора является объединением.
 
-1. ![Уравнение 3](https://github.com/Taally/FIIT_6_compiler/blob/feature/try-doc-gen/Documentation/3_LiveVariableAnalysis/pic3.jpg)
+1. ![Уравнение 3](https://github.com/Taally/FIIT_6_compiler/blob/master/Documentation/3_LiveVariableAnalysis/pic3.jpg)
 
 Здесь уравнение гласит, что переменная активна при входе в блок, если она используется в блоке до переопределения или если она активна на выходе из блока и не переопределена в нем.
 
@@ -2249,7 +2249,7 @@ print (c+a+b);"
 #### Теоретическая часть
 Определение *d* достигает точки *p*, если существует путь от точки, непосредственно следующей за *d*, к точке *p*, такой, что *d* не уничтожается вдоль этого пути. Обозначим *genB* --- множество определений, генерируемых и не переопределённых базовым блоком *B*, и *killB* --- множество остальных определений переменных, определяемых в определениях *genB*, в других базовых блоках. Тогда решить задачу о достигающих определениях можно с помощью итерационного алгоритма: на вход ему подаётся граф потока управления с вычисленными для каждого базового блока множествами *genB* и *killB*, описание алгоритма представлено ниже.
 
-![Алгоритм решения задачи о достигающих определениях](https://github.com/Taally/FIIT_6_compiler/blob/feature/try-doc-gen/Documentation/3_ReachingDefinitions/pic1.jpg)
+![Алгоритм решения задачи о достигающих определениях](https://github.com/Taally/FIIT_6_compiler/blob/master/Documentation/3_ReachingDefinitions/pic1.jpg)
 
 На каждом шаге IN[*B*] и OUT[*B*] не уменьшаются для всех *B* и ограничены сверху, поэтому алгоритм сходится.
 
@@ -2361,16 +2361,16 @@ for k = 0, 1
 
 Алгоритм для решения прямой задачи потока данных:
 
-![Прямая задача потока данных](https://github.com/Taally/FIIT_6_compiler/blob/feature/try-doc-gen/Documentation/3_GenericIterativeAlgorithm/pic2.JPG)
+![Прямая задача потока данных](https://github.com/Taally/FIIT_6_compiler/blob/master/Documentation/3_GenericIterativeAlgorithm/pic2.JPG)
 
 Алгоритм для решения обратной задачи потока данных:
 
-![Обратная задача потока данных](https://github.com/Taally/FIIT_6_compiler/blob/feature/try-doc-gen/Documentation/3_GenericIterativeAlgorithm/pic1.JPG)
+![Обратная задача потока данных](https://github.com/Taally/FIIT_6_compiler/blob/master/Documentation/3_GenericIterativeAlgorithm/pic1.JPG)
 
 Служит для избежания базового итеративного алгоритма для каждой структуры потока данных используемой на стадии оптимизации.
 Его задача вычисление in и out для каждого блока как ряд последовательных приближений. А так же его использование предоставляет ряд полезных свойств приведенных ниже:
 
-![Свойства алгоритма](https://github.com/Taally/FIIT_6_compiler/blob/feature/try-doc-gen/Documentation/3_GenericIterativeAlgorithm/pic3.JPG)
+![Свойства алгоритма](https://github.com/Taally/FIIT_6_compiler/blob/master/Documentation/3_GenericIterativeAlgorithm/pic3.JPG)
 
 #### Практическая часть
 Реализовали класс выходных данных:
