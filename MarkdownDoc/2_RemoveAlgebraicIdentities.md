@@ -32,7 +32,6 @@
 8) ```a = b * 0;``` => ```a = 0;```
 
 Для случаев 1, 2, 8 оптимизация работает и в случае инверсии мест аргументов.
-
 #### Практическая часть
 Статический метод ```RemoveAlgebraicIdentities(List<Instruction> commands)``` принимает список инструкций. 
 Список ```var result = new List<Instruction>();``` служит для накапливания инструкций (упрощенных и исходных). Т.к. данная задача относится только к алгебраическим тождествам, то в данном методе также присутствует переменная: ```variablesAreNotBool```, значение которой равно - ```!bool.TryParse(commands[i].Argument1, out _) && !bool.TryParse(commands[i].Argument2, out _)``` - true в случае если оба аргумента - числа.
@@ -116,7 +115,10 @@ if (commands[i].Operation == "DIV" && variablesAreNotBool && arg1 == arg2)
     continue;
 }
 ```
-
+Результат работы - кортеж, где первое значение - логическая переменная, отвечающая за фиксацию применения оптимизации, а вторая - список инструкций:
+```csharp
+return (wasChanged, result);
+```
 #### Место в общем проекте (Интеграция)
 Используется после создания трехадресного кода: 
 ```csharp
@@ -153,13 +155,14 @@ b = a / 1;
 b = a + 0;
 b = 0 + a;
 b = a - 0;
+b = 0 - a;
 b = b / b;
 ");
     var expected = new List<string>() 
     {
         "#t1 = 0", "b = #t1", "#t2 = 0", "b = #t2", "#t3 = 0", "b = #t3", "#t4 = a", "b = #t4",
         "#t5 = a", "b = #t5", "#t6 = a", "b = #t6", "#t7 = a", "b = #t7", "#t8 = a", "b = #t8",
-        "#t9 = a", "b = #t9", "#t10 = 1", "b = #t10"
+        "#t9 = a", "b = #t9", "#t10 = -a", "b = #t10", "#t11 = 1", "b = #t11"
     };
     var optimizations = new List<Func<List<Instruction>, 
     (bool, List<Instruction>)>>
