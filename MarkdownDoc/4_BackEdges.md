@@ -137,5 +137,47 @@ private bool OpenBlock(BasicBlock block)
 
 #### Тесты
 Для проверки работоспособности программы был написан ряд разнообразных тестов, охватывающих всевозможные случаи.
+Тест на наличие обратных рёбер
+```csharp
+[Test]
+public void BackEdgesWithGoTo()
+{
+    var graph = BuildCFG(@"var a, b, c, d, e, f;
+1: a = 1;
+5: b = 2;
+goto 2;
+2: c = 3;
+d = 4;
+goto 3;
+3: e = 5;
+goto 4;
+4: f = 6;
+goto 5;");
+    Assert.AreEqual(1, graph.GetBackEdges().Count);
+}
+```
 
+Тест на приводимость графа
+```csharp
+[Test]
+public void CheckIfGraphIsReducible1()
+{
+    var graph = BuildCFG(@"var a, b, i, j, p, x;
+input(a);
+1: for i = 1, 5
+{
+    b = b + a * a;
+    a = a + 1;
+}
+goto 1;
+2: for j = 1, 5
+{
+    p = b + a * a;
+    x = a + 1;
+}
+goto 2;
+");
+    Assert.AreEqual(true, graph.IsReducibleGraph());
+}
+```
 
